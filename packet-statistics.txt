@@ -1,0 +1,103 @@
+
+Network Stats for the last 228 seconds:
+
+Total Sent Spatial Packets: 19490
+Total Requested to Send Spatial Packets: 46106
+Total Sent Actor Motion Hints Packets: 0
+Percentage of Usual Bandwidth Used: 42.27%
+
+
+Total Sent: 38620, 0B (8.84MB)
+136 ClientCacheMissResponsePacket      2.62MB, Num 305, Avg 8.81KB
+52  CraftingDataPacket                 1.14MB, Num 3, Avg 387.78KB
+63  PlayerListPacket                   1.12MB, Num 7, Avg 163.55KB
+122 BiomeDefinitionListPacket          0.93MB, Num 3, Avg 315.80KB
+76  AvailableCommandsPacket            0.91MB, Num 3, Avg 309.68KB
+174 SubChunkPacket                     430.79KB, Num 377, Avg 1.14KB
+191 FeatureRegistryPacket              351.68KB, Num 3, Avg 117.23KB
+111 MoveActorDeltaPacket               270.97KB, Num 19490, Avg 14B
+162 ItemRegistryPacket                 269.15KB, Num 3, Avg 89.72KB
+145 CreativeContentPacket              154.68KB, Num 3, Avg 51.56KB
+29  UpdateAttributesPacket             133.51KB, Num 1161, Avg 117B
+39  SetActorDataPacket                 129.39KB, Num 9022, Avg 14B
+13  AddActorPacket                     117.56KB, Num 226, Avg 0.52KB
+19  MovePlayerPacket                   88.69KB, Num 2932, Avg 30B
+123 LevelSoundEventPacket              65.45KB, Num 1606, Avg 41B
+313 JigsawStructureDataPacket          56.92KB, Num 3, Avg 18.97KB
+119 AvailableActorIdentifiersPacket    24.94KB, Num 3, Avg 8.31KB
+40  SetActorMotionPacket               15.50KB, Num 1055, Avg 15B
+58  LevelChunkPacket                   12.17KB, Num 542, Avg 23B
+49  InventoryContentPacket             10.58KB, Num 352, Avg 30B
+25  LevelEventPacket                   4.45KB, Num 259, Avg 17B
+121 NetworkChunkPublisherUpdatePacket  4.29KB, Num 259, Avg 16B
+165 SyncActorPropertyPacket            3.94KB, Num 30, Avg 134B
+302 TrimDataPacket                     3.72KB, Num 3, Avg 1.24KB
+320 CameraAimAssistPresetsPacket       3.19KB, Num 3, Avg 1.06KB
+11  StartGamePacket                    2.94KB, Num 3, Avg 0.98KB
+172 UpdateSubChunkBlocksPacket         2.87KB, Num 33, Avg 89B
+72  GameRulesChangedPacket             2.13KB, Num 3, Avg 0.71KB
+56  BlockActorDataPacket               1.77KB, Num 33, Avg 54B
+199 UnlockedRecipesPacket              1.46KB, Num 4, Avg 373B
+3   ServerToClientHandshakePacket      1.25KB, Num 3, Avg 428B
+44  AnimatePacket                      1.11KB, Num 163, Avg 7B
+14  RemoveActorPacket                  1.11KB, Num 163, Avg 7B
+316 CameraAimAssistPacket              1.02KB, Num 58, Avg 18B
+12  AddPlayerPacket                    0.99KB, Num 2, Avg 0.49KB
+198 CameraPresetsPacket                0.96KB, Num 3, Avg 327B
+15  AddItemActorPacket                 0.88KB, Num 3, Avg 301B
+124 LevelEventGenericPacket            0.69KB, Num 8, Avg 88B
+314 CurrentStructureFeaturePacket      0.68KB, Num 107, Avg 6B
+31  MobEquipmentPacket                 0.60KB, Num 25, Avg 24B
+21  UpdateBlockPacket                  0.53KB, Num 43, Avg 12B
+48  PlayerHotbarPacket                 352B, Num 88, Avg 4B
+27  ActorEventPacket                   328B, Num 82, Avg 4B
+187 UpdateAbilitiesPacket              280B, Num 8, Avg 35B
+9   TextPacket                         198B, Num 4, Avg 49B
+45  RespawnPacket                      180B, Num 12, Avg 15B
+326 PlayerLocationPacket               144B, Num 7, Avg 20B
+161 CorrectPlayerMovePredictionPacket  117B, Num 3, Avg 39B
+10  SetTimePacket                      104B, Num 26, Avg 4B
+43  SetSpawnPositionPacket             99B, Num 3, Avg 33B
+6   ResourcePacksInfoPacket            87B, Num 3, Avg 29B
+96  SetLastHurtByPacket                76B, Num 24, Avg 3B
+50  InventorySlotPacket                70B, Num 10, Avg 7B
+30  InventoryTransactionPacket         55B, Num 1, Avg 55B
+152 EmoteListPacket                    52B, Num 1, Avg 52B
+189 DeathInfoPacket                    47B, Num 1, Avg 47B
+65  LegacyTelemetryEventPacket         39B, Num 2, Avg 19B
+143 NetworkSettingsPacket              36B, Num 3, Avg 12B
+7   ResourcePackStackPacket            36B, Num 3, Avg 12B
+157 MotionPredictionHintsPacket        32B, Num 2, Avg 16B
+2   PlayStatusPacket                   30B, Num 6, Avg 5B
+188 UpdateAdventureSettingsPacket      28B, Num 4, Avg 7B
+307 SetPlayerInventoryOptionsPacket    14B, Num 2, Avg 7B
+160 PlayerFogPacket                    9B, Num 3, Avg 3B
+42  SetHealthPacket                    8B, Num 4, Avg 2B
+59  SetCommandsEnabledPacket           6B, Num 3, Avg 2B
+70  ChunkRadiusUpdatedPacket           6B, Num 3, Avg 2B
+60  SetDifficultyPacket                6B, Num 3, Avg 2B
+47  ContainerClosePacket               4B, Num 1, Avg 4B
+17  TakeItemActorPacket                3B, Num 1, Avg 3B
+
+Total Received: 5629, 0B (1.16MB)
+1   LoginPacket                        0.70MB, Num 3, Avg 238.49KB
+144 PlayerAuthInputPacket              411.86KB, Num 4440, Avg 94B
+135 ClientCacheBlobStatusPacket        33.26KB, Num 305, Avg 111B
+175 SubChunkRequestPacket              14.28KB, Num 377, Avg 38B
+30  InventoryTransactionPacket         3.79KB, Num 89, Avg 43B
+33  InteractPacket                     1.80KB, Num 123, Avg 15B
+44  AnimatePacket                      1.11KB, Num 162, Avg 7B
+31  MobEquipmentPacket                 336B, Num 16, Avg 21B
+36  PlayerActionPacket                 296B, Num 23, Avg 12B
+321 ClientCameraAimAssistPacket        290B, Num 58, Avg 5B
+322 ClientMovementPredictionSyncPacket 244B, Num 4, Avg 61B
+152 EmoteListPacket                    52B, Num 1, Avg 52B
+8   ResourcePackClientResponsePacket   24B, Num 6, Avg 4B
+312 ServerboundLoadingScreenPacket     24B, Num 6, Avg 4B
+193 RequestNetworkSettingsPacket       18B, Num 3, Avg 6B
+45  RespawnPacket                      15B, Num 1, Avg 15B
+69  RequestChunkRadiusPacket           9B, Num 3, Avg 3B
+129 ClientCacheStatusPacket            9B, Num 3, Avg 3B
+113 SetLocalPlayerAsInitializedPacket  6B, Num 3, Avg 2B
+4   ClientToServerHandshakePacket      3B, Num 3, Avg 1B
+
