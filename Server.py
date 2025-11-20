@@ -6,6 +6,7 @@ import shutil
 from datetime import datetime, timedelta
 import threading
 from collections import defaultdict
+import stat
 
 # Config and Setup
 
@@ -31,7 +32,7 @@ DAYS_TO_KEEP_HOUR_BACKUPS = 1  # (Days) How many days to keep hourly backups.
 HOURS_TO_KEEP_QUICK_BACKUPS = 2  # (Hours) How many hours to keep quick backups.
 
 os.makedirs(BACKUP_FOLDER, exist_ok=True)
-os.makedirs(BACKUP_FOLDER + "/" + LEVEL_NAME, exist_ok=True)
+os.makedirs(os.path.join(BACKUP_FOLDER, LEVEL_NAME), exist_ok=True)
 
 # BACKUP LOGIC 
 
@@ -78,7 +79,12 @@ def backup_world():
 
     # Copy files
     for rel_path in file_list:
+
+    # FIX: remove LEVEL_NAME/ prefix so backups don't nest incorrectly
+
         src = os.path.join(WORLD_FOLDER, rel_path)
+        if rel_path.startswith(f"{LEVEL_NAME}/"):
+            rel_path = rel_path[len(LEVEL_NAME)+1:]
         dst = os.path.join(backup_path, rel_path)
 
         os.makedirs(os.path.dirname(dst), exist_ok=True)
@@ -96,11 +102,16 @@ def backup_world():
     cleanup_backups()
 
 def cleanup_backups():
+
+    def remove_readonly(func, path, exc):
+        os.chmod(path, stat.S_IWRITE)
+        func(path)
+
     now = datetime.now()
     hour_groups = defaultdict(list)
     day_groups = defaultdict(list)
-    for folder in os.listdir(BACKUP_FOLDER + "/" + LEVEL_NAME):
-        folder_path = os.path.join(BACKUP_FOLDER + "/" + LEVEL_NAME, folder)
+    for folder in os.listdir(os.path.join(BACKUP_FOLDER, LEVEL_NAME)):
+        folder_path = os.path.join(BACKUP_FOLDER, LEVEL_NAME, folder)
         if not os.path.isdir(folder_path):
             continue
 
@@ -122,7 +133,7 @@ def cleanup_backups():
 
         for ts, path in items[1:]:
             if now - ts > timedelta(hours=HOURS_TO_KEEP_QUICK_BACKUPS):
-                shutil.rmtree(path)
+                shutil.rmtree(path, onerror=remove_readonly)
                 print("🧹 Deleted:", path)
 
     for day_key, items in day_groups.items():
@@ -133,7 +144,7 @@ def cleanup_backups():
 
         for ts, path in items[1:]:
             if now - ts > timedelta(days=DAYS_TO_KEEP_HOUR_BACKUPS):
-                shutil.rmtree(path)
+                shutil.rmtree(path, onerror=remove_readonly)
                 print("🧹 Deleted:", path)
 
 # World Trimming Logic
