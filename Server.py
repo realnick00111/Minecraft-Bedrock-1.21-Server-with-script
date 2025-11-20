@@ -7,6 +7,7 @@ from datetime import datetime, timedelta
 import threading
 from collections import defaultdict
 import stat
+from amulet import load_level
 
 # Config and Setup
 
@@ -31,13 +32,17 @@ TRIM_BOUND = 1000  # (Blocks) The amount of blocks before going outside +/- TRIM
 DAYS_TO_KEEP_HOUR_BACKUPS = 1  # (Days) How many days to keep hourly backups.
 HOURS_TO_KEEP_QUICK_BACKUPS = 2  # (Hours) How many hours to keep quick backups.
 
+# Ensure backup directories exist
+
 os.makedirs(BACKUP_FOLDER, exist_ok=True)
 os.makedirs(os.path.join(BACKUP_FOLDER, LEVEL_NAME), exist_ok=True)
 
-# BACKUP LOGIC 
+# Server Output Setup
 
 SERVER_OUTPUT_BUFFER = ""
 SERVER_OUTPUT_LOCK = threading.Lock()
+
+# Backup Logic
 
 def backup_loop():
     timeUntilOn5Minutes = BACKUP_INTERVAL - (time.time() % BACKUP_INTERVAL)
@@ -152,18 +157,48 @@ def cleanup_backups():
 def trim_world():
     send_command("say Trimming world... Stopping server in 1 minute.")
     time.sleep(30)
-    close_server("Final warning...  Stopping serverin 30 seconds.", 30)
+
+    # just-in-case backup
+    backup_world()
+
+    close_server("Final warning... Stopping server in 30 seconds.", 30)
+
     print(f"[{datetime.now()}] 🛑 Server stopped for trimming.")
-    print(f"[{datetime.now()}] ✂️ Trimming world outside ±{TRIM_BOUND}...")
-    # Placeholder: implement with Amulet API or similar
-    # Example: Amulet can remove chunks/blocks outside bounds safely
-    # from amulet import load_world
-    # world = load_world(WORLD_FOLDER)
-    # ... remove chunks/blocks outside TRIM_BOUND ...
-    # world.save()
+    print(f"[{datetime.now()}] ✂️ Trimming world outside ±{TRIM_BOUND} blocks...")
+
+    chunk_bound = (TRIM_BOUND // 16) + 1
+
+    world_path = WORLD_FOLDER
+    print(f"[{datetime.now()}] 📁 Loading world into amulet: {world_path}")
+
+    level = load_level(world_path)
+
+    for dimension in level.dimensions:
+        chunk_manager = level.get_chunk_manager(dimension)
+
+        existing_chunks = list(chunk_manager.list_chunks())
+
+        removed = 0
+
+        for cx, cz in existing_chunks:
+            if abs(cx) > chunk_bound or abs(cz) > chunk_bound:
+                chunk_manager.delete_chunk(cx, cz)
+                removed += 1
+
+        if removed > 0:
+            print(f"[{datetime.now()}] 🗑 Removed {removed} chunks in dimension {dimension}")
+        else:
+            print(f"[{datetime.now()}] ✅ No chunks to remove in dimension {dimension}")
+
+    print(f"[{datetime.now()}] 💾 Saving trimmed world...")
+    level.save()
+    level.close()
+
     print(f"[{datetime.now()}] ✅ World trimmed.")
+
     start_server()
-    print(f"[{datetime.now()}] ✅ Server restarted after trimming.")
+    print(f"[{datetime.now()}] 🛜 Server restarted after trimming.")
+
 
 # process management
 
@@ -276,7 +311,6 @@ def wait_for_query_file_list(timeout=10):
             time.sleep(0.05)
 
     raise TimeoutError("Timeout waiting for save query file list")
-
 
 # Main Execution
 
